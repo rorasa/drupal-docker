@@ -1,0 +1,32 @@
+version: "3"
+services:
+  drupal:
+    image: drupal:9
+    depends_on:
+      - postgres
+    ports:
+      - "8000:80"
+    restart: on-failure
+    networks:
+      - drupalnet
+    volumes:
+      - "sitedata:/var/www/html"
+
+  postgres:
+    image: postgres:11
+    environment:
+      POSTGRES_DBL: drupal
+      POSTGRES_USER: drupal
+      POSTGRES_PASSWORD: passdrupal
+    restart: on-failure
+    networks:
+      - drupalnet
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+
+networks:
+  drupalnet:
+
+volumes:
+  sitedata:
+  dbdata:
