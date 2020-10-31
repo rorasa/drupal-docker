@@ -24,6 +24,13 @@ To stop the service, simply run
 docker-compose down
 ```
 
+## Production deployment
+
+To deploy this compose on production, the use of a reverse proxy (such as Nginx) is advisable.
+The minimum recommendation for a small, nonsensitive site is as follows:
+1. Set the server to redirect the domain request on HTTP (port 80) to HTTPS (port 443).
+2. Set the reverse proxy such that the domain request on HTTPS (port 443) is reversed proxy to localhost (port 8000).
+
 ## Persistent storage and backup
 
 This compose creates two persistent volumes to store the data:
